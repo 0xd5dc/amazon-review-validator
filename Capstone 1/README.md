@@ -25,7 +25,7 @@ I don't need all the columns to perform analysis.
 
 ## EDA
 ## Hypothesis
-### In reviews with rating>4 and <2, people found reviews with words top 50 occurances are more helpful
+ In reviews with rating>4 and <2, people found reviews with words top 50 occurances are more helpful
  More frequently used words are more helpful or less frequently used words are more helpful?
  1)
  - [ ] H0: the helpfulness mean of most used 100 words > the helpfulness mean of the population
