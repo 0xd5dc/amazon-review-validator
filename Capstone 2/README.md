@@ -11,3 +11,21 @@
     - [x] compare the accuracies from the tested models
 3. Output formatted data for visual aids
     - [ ] make presentation slides
+    
+# Directory
+
+### A typical top-level directory layout
+
+    .
+    ├── src     
+    │    ├── eda.ipynb              # EDA notebook
+    │    ├── environment.py         # spark environment configs
+    │    ├── helpers.py             # helper functions used in pyspark
+    │    ├── nlp.ipynb              # natural language process notebook
+    │    └── prediction.ipynb       # prediction notebook
+    └── README.md
+
+
+> `Error` import errors caused by missing init.py 
+>
+> `Fix` use %load to work around
