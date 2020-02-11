@@ -5,7 +5,7 @@ My data science project to guess if an amazon review is helpful for galvanize DS
     .
     ├── src     
     │    ├── data_migration.ps          # data migration from aws s3 to Azure blob
-    │    ├── etl.sh                     # clean data
+    │    └── etl.sh                     # clean data
     └── README.md
 
 ## Automation Pipeline
