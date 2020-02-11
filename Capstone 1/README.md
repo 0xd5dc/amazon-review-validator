@@ -1,6 +1,11 @@
 # Amazon Review Validator
 My data science project to guess if an amazon review is helpful for galvanize DSI. 
 ## Automation Pipeline
+- create crontab jobs
+    - ETL data
+    - run spark job to train and test model with the cleaned data
+    - save formatted output
+- creat visual aids
 ### Planning and Reasoning
 Amazon Customer Review dataset is on AWS S3, but I have a few Azure VMs, which utlized around 20%, and decided to use my Azure VMs instead of AWS S3.
 
