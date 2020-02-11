@@ -44,3 +44,8 @@ I don't need all the columns to perform analysis.
  H0: the helpfulness mean of lower rating reviews > the helpfulness mean of the population
  H1: the helpfulness mean of lower rating reviews < the helpfulness mean of the population
  
+
+## SHORTCUTS
+[Capstone 1](https://github.com/0xd5dc/amazon-review-validator/blob/master/Capstone%201/README.md)
+[Capstone 2](https://github.com/0xd5dc/amazon-review-validator/blob/master/Capstone%202/README.md)
+[Capstone 3](https://github.com/0xd5dc/amazon-review-validator/blob/master/Capstone%203/README.md)
