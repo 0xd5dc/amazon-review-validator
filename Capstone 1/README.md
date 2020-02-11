@@ -1,5 +1,13 @@
 # Amazon Review Validator
 My data science project to guess if an amazon review is helpful for galvanize DSI. 
+## Directory
+
+    .
+    ├── src     
+    │    ├── data_migration.ps          # data migration from aws s3 to Azure blob
+    │    ├── etl.sh                     # clean data
+    └── README.md
+
 ## Automation Pipeline
 - create crontab jobs
     - ETL data
@@ -12,11 +20,18 @@ Amazon Customer Review dataset is on AWS S3, but I have a few Azure VMs, which u
 I am going to deploy Spark docker containers to perform data analysis, may create a spark cluster in production stage.
 
 ### Data Migration AWS S3 Bucket -> Azure Blob Storage
-Azure Documentations are outdated but its staff responded to my questions within a reasonable time frame.
+Steps for data migrate check [this Powershell scripts]()
+>Azure Documentations are outdated but its staff responded to my questions within a reasonable time frame.
 
-`
-Azcopy s3 blob
-`
+```
+sudo apt-get install blobfuse -y
+mkdir ~/data
+vim ~/fuse_connection.cfg
+sudo blobfuse ~/data --tmp-path=/mnt/resource/blobfusetmp  --config-file=/home/azureuser/fuse_connection.cfg -o attr_timeout=240 -o entry_timeout=240 -o negative_timeout=120 -o allow_other
+```
+>save credentials in fuse_connection.cfg
+>
+>mount azure blob to ~/data
 ### Data Preparation
 I don't need all the columns to perform analysis.
 1. convert reviews to lowercase and remove html tags

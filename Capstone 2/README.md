@@ -14,8 +14,6 @@
     
 # Directory
 
-### A typical top-level directory layout
-
     .
     ├── src     
     │    ├── eda.ipynb              # EDA notebook

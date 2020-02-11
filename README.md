@@ -1,5 +1,30 @@
 # Amazon Review Validator
+## Directory
+    .
+    ├── Capstone 1   
+    │    ├── src     
+    │    │    ├── data_migration.ps          # data migration from aws s3 to Azure blob
+    │    │    └── etl.sh                     # clean data
+    │    └── README.md  
+    ├── Capstone 2          
+    │    ├── src     
+    │    │    ├── eda.ipynb                 # EDA notebook
+    │    │    ├── environment.py            # spark environment configs
+    │    │    ├── helpers.py                # helper functions used in pyspark
+    │    │    ├── nlp.ipynb                 # natural language process notebook
+    │    │    └── prediction.ipynb          # prediction notebook
+    │    └── README.md                      # clean data
+    ├── Capstone 3   
+    │    ├── src     
+    │    │    ├── placeholder               # placeholder
+    │    │    └── placeholder               # placeholder
+    │    └── README.md  
+    └── README.md
+        
+        
+        
 
+    
 ## [Capstone 1](https://github.com/0xd5dc/amazon-review-validator/blob/master/Capstone%201/README.md)
 
 ### Dataset     
