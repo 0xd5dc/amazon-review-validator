@@ -1,25 +1,25 @@
 # Amazon Review Validator
 
-## Capstone 1
+## [Capstone 1](https://github.com/0xd5dc/amazon-review-validator/blob/master/Capstone%201/README.md)
 ### Dataset     
 - Amazon Customer Reviews - US Camera category
 
 ### Objectives
--[x] Migrate data from AWS S3 to Azure Blob Storage
--[x] ETL data for EDA
--[x] EDA
--[x] Hypothesis
--[x] Results
+- [x] Migrate data from AWS S3 to Azure Blob Storage
+- [x] ETL data for EDA
+- [x] EDA
+- [x] Hypothesis
+- [x] Results
 ## Capstone 2
 ### Dataset     
 - Amazon Customer Reviews - US Camera category
 
 ### Objectives
--[x] ETL data for EDA
--[x] EDA
--[x] Prediction
--[x] Results
--[x] Design and deploy the workflow with Apache Airflow
+- [x] ETL data for EDA
+- [x] EDA
+- [x] Prediction
+- [x] Results
+- [x] Design and deploy the workflow with Apache Airflow
 
 ## Capstone 3
 ### Dataset     
@@ -28,7 +28,7 @@
 - Amazon Customer Reviews - US Cellphone category
 - Amazon Customer Reviews - US Computer category
 ### Objectives
--[ ] EDA
--[ ] Tensorflow
--[ ] Results
--[ ] Applications
+- [ ] EDA
+- [ ] Tensorflow
+- [ ] Results
+- [ ] Applications
