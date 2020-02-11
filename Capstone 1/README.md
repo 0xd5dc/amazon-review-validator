@@ -2,7 +2,7 @@
 My data science project to guess if an amazon review is helpful for galvanize DSI. 
 ## Automation Pipeline
 ### Planning and Reasoning
-Amazon Customer Review dataset is on Amazon S3, but my $1000 AWS credit is not available yet. I decided to use my Azure VMs, which utlized around 20%.
+Amazon Customer Review dataset is on AWS S3, but I have a few Azure VMs, which utlized around 20%, and decided to use my Azure VMs instead of AWS S3.
 
 I am going to deploy Spark docker containers to perform data analysis, may create a spark cluster in production stage.
 
