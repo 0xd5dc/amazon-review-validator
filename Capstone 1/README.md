@@ -7,13 +7,16 @@ Amazon Customer Review dataset is on AWS S3, but I have a few Azure VMs, which u
 I am going to deploy Spark docker containers to perform data analysis, may create a spark cluster in production stage.
 
 ### Data Migration AWS S3 Bucket -> Azure Blob Storage
-Azure Documentations are outdated but its staff responded to my questions within a reasonable timeframe.
+Azure Documentations are outdated but its staff responded to my questions within a reasonable time frame.
 
 `
-Azcopy ss
+Azcopy s3 blob
 `
 ### Data Preparation
-convert tsv to parquet in partitions because spark optimize performance with parquet files and the some of original tsv data files are more than 2GB, which can be partitioned and read by Spark in parallel.
+I don't need all the columns to perform analysis.
+1. convert reviews to lowercase and remove html tags
+2. select meaningful columns as features
+3. optional - convert csv to parquet in order to optimize performance
 
 ## EDA
 ## Hypothesis
