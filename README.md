@@ -1,6 +1,7 @@
 # Amazon Review Validator
 
 ## [Capstone 1](https://github.com/0xd5dc/amazon-review-validator/blob/master/Capstone%201/README.md)
+
 ### Dataset     
 - Amazon Customer Reviews - US Camera category
 
@@ -10,7 +11,8 @@
 - [x] EDA
 - [x] Hypothesis
 - [x] Results
-## Capstone 2
+## [Capstone 2](https://github.com/0xd5dc/amazon-review-validator/blob/master/Capstone%202/README.md)
+
 ### Dataset     
 - Amazon Customer Reviews - US Camera category
 
@@ -21,7 +23,8 @@
 - [x] Results
 - [x] Design and deploy the workflow with Apache Airflow
 
-## Capstone 3
+## [Capstone 3](https://github.com/0xd5dc/amazon-review-validator/blob/master/Capstone%203/README.md)
+
 ### Dataset     
 - Amazon Customer Reviews - US Camera category
 - Amazon Customer Reviews - US Toy category
