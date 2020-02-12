@@ -3,7 +3,7 @@ from pyspark.ml.classification import LogisticRegression, NaiveBayes, DecisionTr
 import pyspark as ps
 from pyspark.sql.types import StructField, StructType, StringType, IntegerType
 
-DATA_FILE = '../../amazon_reviews_us_Camera_v1_00.tsv.gz'
+DATA_FILE = '../../data/amazon_reviews_us_Camera_v1_00.tsv.gz'
 APP_NAME = 'EDA'
 FEATURES = ['star_rating', 'review_body', 'helpful_votes', 'total_votes', 'verified_purchase', 'review_date']
 SAMPLE_SIZE = 10000
@@ -34,11 +34,10 @@ sc = spark.sparkContext
 
 df = spark.read.format("csv") \
     .option("header", "true") \
-    .option("mode", "FAILFAST") \
     .option("sep", "\t") \
     .schema(review_schema) \
     .load(DATA_FILE)
-df.createOrReplaceTempView("eda_sql_view")
+df.createOrReplaceTempView("dfTable")
 
 review_all = df.select(FEATURES)
 review_sample = df.select(FEATURES).limit(SAMPLE_SIZE).cache()
