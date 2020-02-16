@@ -2,8 +2,7 @@ from pyspark.ml.classification import LogisticRegression, NaiveBayes, DecisionTr
     RandomForestClassifier
 from pyspark.ml.feature import VectorAssembler
 from pyspark.mllib.evaluation import BinaryClassificationMetrics
-from pyspark.sql.functions import current_date, expr, datediff, to_date
-from pyspark.sql.functions import length, regexp_replace
+from pyspark.sql.functions import current_date, expr, datediff, to_date, lit, coalesce, length, regexp_replace
 
 from nltk.corpus import stopwords
 from nltk.tokenize import sent_tokenize
@@ -44,7 +43,7 @@ def prepare_features(df):
     df = df.withColumn('exclam', length('review_body') - length(regexp_replace('review_body', '\!', '')))
     df = df.withColumn('age', datediff(current_date(), to_date(df['review_date'])))
     df = df.withColumn('review_length', length(df['review_body']))
-    df = df.withColumn('helfulness', df['helpful_votes'] / df['total_votes'])
+    df = df.withColumn('helfulness', coalesce(df['helpful_votes'] / df['total_votes'],lit(0.0)))
     df = df.withColumn('label', expr("CAST(verified_purchase='Y' As INT)"))
     select_cols = df.select(['star_rating', 'helfulness', 'age', 'review_length', 'label']).na.fill(0)
     return select_cols
