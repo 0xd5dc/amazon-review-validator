@@ -18,7 +18,7 @@ def hello():
     test if the module is accessible
     :rtype: None
     """
-    print('import works properly!')
+    print('libs imported properly!')
 
 
 # ETL function
@@ -42,6 +42,16 @@ def fill_na_mean(df, column):
 
 def get_null_counts(df):
     df.select([count(when(isnan(c) | col(c).isNull(), c)).alias(c) for c in df.columns]).show()
+
+
+def get_distribution_col(spark, col_a, col_b):
+    """
+    show the distribution of col_b in each group of col_a
+    :param spark: current spark instance
+    :param col_a: the column has finite groups
+    :param col_b: the column to count
+    """
+    spark.sql('select {0}, sum({1}) as {1} from df group by {0} order by {0}'.format(col_a, col_b)).show()
 
 
 # NLP function

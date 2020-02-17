@@ -1,12 +1,37 @@
 # Amazon Review Validator
 My data science project to guess if an amazon review is helpful for galvanize DSI. 
-## Directory
-
-    .
-    ├── src     
-    │    ├── data_migration.ps          # data migration from aws s3 to Azure blob
-    │    └── etl.sh                     # clean data
-    └── README.md
+## Summary
+1. explore the data with sql
+    - target columns:
+        - star_rating
+        - verified_purchase
+    - questions:
+        - how does a user rate?
+            - is there a relationship between new rating and the product title length?
+            - is there a relationship between new rating and the review headline length?  
+            - is there a relationship between new rating and the review body length?  
+            - is there a relationship between new rating and the review date(age)?  
+            - is there a relationship between new rating and the verified purchase?  
+            - is there a relationship between new rating and the vine?  
+            - is there a relationship between new rating and the helpful votes?  
+            - is there a relationship between new rating and the total votes?  
+            - is there a relationship between new rating and the accumulated rating?  
+                - for the same product_id, calculate avg accumulated rating for each review date
+            - is there a relationship between new rating and the accumulated number of reviews?  
+        - did a user have a purchase?
+            - is there a relationship between the verified purchase and the product title length?
+            - is there a relationship between the verified purchase and the review headline length?  
+            - is there a relationship between the verified purchase and the review body length?  
+            - is there a relationship between the verified purchase and the review date(age)?  
+            - is there a relationship between the verified purchase and the star rating?  
+            - is there a relationship between the verified purchase and the vine?  
+            - is there a relationship between the verified purchase and the accumulated rating?  
+            - is there a relationship between the verified purchase and the accumulated number of reviews?  
+            - is there a relationship between the verified purchase and the accumulated helpful votes?  
+            - is there a relationship between the verified purchase and the accumulated total votes?           
+2. generate new columns based on the findings/trends from the previous step
+3. perform Null Hypothesis Test on the sample and the whole dataset
+4. output the results and visualizations 
 
 ## Automation Pipeline
 - create crontab jobs
