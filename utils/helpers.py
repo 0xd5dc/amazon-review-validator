@@ -2,13 +2,26 @@ from pyspark.ml.classification import LogisticRegression, NaiveBayes, DecisionTr
     RandomForestClassifier
 from pyspark.ml.feature import VectorAssembler
 from pyspark.mllib.evaluation import BinaryClassificationMetrics
-from pyspark.sql.functions import current_date, expr, datediff, to_date, lit, coalesce, length, regexp_replace
+from pyspark.sql.functions import current_date, expr, datediff, to_date, lit, coalesce, length, regexp_replace, count, \
+    isnan, col, when
 
 from nltk.corpus import stopwords
 from nltk.tokenize import sent_tokenize
 from nltk.tokenize import word_tokenize
 
 import re
+
+
+def get_correlation_target_col_length(target, col, table):
+    spark.sql("select {0}, avg(length({1})) from {2} group by {0} order by {0}".format(target, col, table)).show()
+
+
+def fill_na_mean(df, column):
+    return df.fillna(df.selectExpr('avg({0}) as mean'.format(column)).first().asDict()['mean'], subset=[column])
+
+
+def get_null_counts(df):
+    df.select([count(when(isnan(c) | col(c).isNull(), c)).alias(c) for c in df.columns]).show()
 
 
 def get_kv_pairs(row, exclusions=[]):
@@ -43,7 +56,7 @@ def prepare_features(df):
     df = df.withColumn('exclam', length('review_body') - length(regexp_replace('review_body', '\!', '')))
     df = df.withColumn('age', datediff(current_date(), to_date(df['review_date'])))
     df = df.withColumn('review_length', length(df['review_body']))
-    df = df.withColumn('helfulness', coalesce(df['helpful_votes'] / df['total_votes'],lit(0.0)))
+    df = df.withColumn('helfulness', coalesce(df['helpful_votes'] / df['total_votes'], lit(0.0)))
     df = df.withColumn('label', expr("CAST(verified_purchase='Y' As INT)"))
     select_cols = df.select(['star_rating', 'helfulness', 'age', 'review_length', 'label']).na.fill(0)
     return select_cols
