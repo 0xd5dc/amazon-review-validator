@@ -12,6 +12,16 @@ from nltk.tokenize import word_tokenize
 import re
 
 
+# Testing function
+def hello():
+    """
+    test if the module is accessible
+    :rtype: None
+    """
+    print('import works properly!')
+
+
+# ETL function
 def get_null_columns(df, cols=['review_date', 'review_length']):
     for column in cols:
         df.select(['review_id', column]).where('{0} is NULL'.format(column)).show()
@@ -34,6 +44,7 @@ def get_null_counts(df):
     df.select([count(when(isnan(c) | col(c).isNull(), c)).alias(c) for c in df.columns]).show()
 
 
+# NLP function
 def get_kv_pairs(row, exclusions=[]):
     # get the text from the row entry
     text = str(row.review_body).lower()
@@ -62,6 +73,7 @@ def get_review_age(df):
     return df.select(datediff(current_date(), to_date(df['review_date'])))
 
 
+# Classifier function
 def prepare_features(df):
     df = df.withColumn('exclam', length('review_body') - length(regexp_replace('review_body', '\!', '')))
     df = df.withColumn('age', datediff(current_date(), to_date(df['review_date'])))
@@ -92,6 +104,4 @@ def get_vectorized_features(df, cols=['star_rating']):
         'features')
     return va.transform(df)
 
-
-def hello():
-    print('hello works')
+# Hypothesis function
