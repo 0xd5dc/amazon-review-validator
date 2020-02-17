@@ -1,5 +1,3 @@
-from pyspark.ml.classification import LogisticRegression, NaiveBayes, DecisionTreeClassifier, GBTClassifier, \
-    RandomForestClassifier
 import pyspark as ps
 from pyspark.sql.types import StructField, StructType, StringType, IntegerType
 
