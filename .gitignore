@@ -1,4 +1,5 @@
 .idea
 *.iml
 data
+*.pyc
 .ipynb_checkpoints
