@@ -12,7 +12,17 @@ from nltk.tokenize import word_tokenize
 import re
 
 
-def get_correlation_target_col_length(target, col, table):
+def get_null_columns(df, cols=['review_date', 'review_length']):
+    for column in cols:
+        df.select(['review_id', column]).where('{0} is NULL'.format(column)).show()
+
+
+def get_unique_values(df):
+    for column in df.columns:
+        print("{0}: {1} unique values".format(column, df.select(column).distinct().count()))
+
+
+def get_correlation_target_col_length(spark, target, col, table):
     spark.sql("select {0}, avg(length({1})) from {2} group by {0} order by {0}".format(target, col, table)).show()
 
 
