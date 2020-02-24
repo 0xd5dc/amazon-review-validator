@@ -6,7 +6,7 @@ from tensorflow.keras.layers import Embedding, LSTM, Dense, SimpleRNN, GRU
 from tensorflow.keras.preprocessing.text import Tokenizer
 import logging
 
-DATA_FILE = '../tests/sample_us.tsv'
+DATA_FILE = '../data/sample_us.tsv'
 EMBEDDING_VECTOR_LENGTH = 32
 TOP_WORDS = 50000
 MAX_REVIEW_LENGTH = 600
@@ -14,7 +14,7 @@ NUM_WORDS = 50000
 
 if __name__ == '__main__':
     logging.basicConfig(filename='task.log', filemode='a', level=logging.DEBUG,
-                        format='%(name)s - %(levelname)s - %(message)s')
+                        format='%(asctime)s - %(levelname)s - %(message)s')
     # load data
     df = pd.read_csv(DATA_FILE, sep='\t')
     # cast label to int
@@ -51,7 +51,6 @@ if __name__ == '__main__':
 
     # fit and eval models
     # for model in models:
-    logging.info(model.summary())
     model.fit(X_train_pad, Y_train, epochs=10, batch_size=64, validation_data=(X_test_pad, Y_test))
     # Final evaluation of the model on test data
     scores = model.evaluate(X_test_pad, Y_test, verbose=0)
