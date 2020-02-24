@@ -4,13 +4,17 @@ from tensorflow.keras.preprocessing import sequence
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Embedding, LSTM, Dense, SimpleRNN, GRU
 from tensorflow.keras.preprocessing.text import Tokenizer
+import logging
 
-DATA_FILE = '../data/sample_us.tsv'
+DATA_FILE = '../tests/sample_us.tsv'
 EMBEDDING_VECTOR_LENGTH = 32
 TOP_WORDS = 50000
 MAX_REVIEW_LENGTH = 600
 NUM_WORDS = 50000
+
 if __name__ == '__main__':
+    logging.basicConfig(filename='task.log', filemode='a', level=logging.DEBUG,
+                        format='%(name)s - %(levelname)s - %(message)s')
     # load data
     df = pd.read_csv(DATA_FILE, sep='\t')
     # cast label to int
@@ -22,15 +26,13 @@ if __name__ == '__main__':
     # under-sampling
     samples = reviews[reviews['label'] == sorted_counts[1][0]].sample(sorted_counts[0][1])
     samples = pd.concat([samples, reviews[reviews['label'] == sorted_counts[0][0]]])
-    print(samples.mean())
+    logging.info(samples['label'].mean())
     # split data
     X_train, X_test, Y_train, Y_test = train_test_split(samples['review_body'].values, \
                                                         samples['label'].values, \
                                                         test_size=0.30, \
                                                         shuffle=True)
-    print(Y_train.mean(), Y_test.mean())
-    print(Y_train, Y_test)
-
+    logging.info("Y train mean: {0}, Y test mean: {1}".format(Y_train.mean(), Y_test.mean()))
     # tokenize the reviews text
     tokenizer = Tokenizer(num_words=NUM_WORDS)
     tokenizer.fit_on_texts(X_train)
@@ -49,8 +51,9 @@ if __name__ == '__main__':
 
     # fit and eval models
     # for model in models:
-    print(model.summary())
+    logging.info(model.summary())
     model.fit(X_train_pad, Y_train, epochs=10, batch_size=64, validation_data=(X_test_pad, Y_test))
     # Final evaluation of the model on test data
     scores = model.evaluate(X_test_pad, Y_test, verbose=0)
-    print("Accuracy: %.2f%%" % (scores[1] * 100))
+    logging.info("Accuracy: %.2f%%" % (scores[1] * 100))
+    logging.info('done')
