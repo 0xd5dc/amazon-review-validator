@@ -50,7 +50,7 @@ if __name__ == '__main__':
     # fit and eval models
     # for model in models:
     print(model.summary())
-    model.fit(X_train_pad, Y_train, nb_epoch=10, batch_size=64, validation_data=(X_test_pad, Y_test))
+    model.fit(X_train_pad, Y_train, epochs=10, batch_size=64, validation_data=(X_test_pad, Y_test))
     # Final evaluation of the model on test data
     scores = model.evaluate(X_test_pad, Y_test, verbose=0)
     print("Accuracy: %.2f%%" % (scores[1] * 100))
