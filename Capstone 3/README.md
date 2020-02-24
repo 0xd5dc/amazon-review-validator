@@ -16,7 +16,16 @@ This project uses review body and verfied_purchase columns from Amazon Review Da
     - [x] compare the results
 3. Output formatted data for visual aids
     - [ ] make presentation slides
+4. Deploy to the Spark Cluster
+    - [x] create spark clusters
+    - [ ] rewrite pandas code in pyspark
+    - [ ] failure recovery
+    - [ ] scale linearly?
 
+## REFERENCES
+- [TensorFlow On Spark: Scalable TensorFlow Learning on Spark Clusters](https://databricks.com/session/tensorflow-on-spark-scalable-tensorflow-learning-on-spark-clusters)
+- [TensorFlow On Spark Github](https://github.com/yahoo/TensorFlowOnSpark)
+- [Tensorflow on Databricks](https://docs.databricks.com/applications/deep-learning/single-node-training/tensorflow.html)
 ## SHORTCUTS
 [Index](https://github.com/0xd5dc/amazon-review-validator/)
 
