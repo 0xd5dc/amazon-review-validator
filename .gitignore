@@ -2,4 +2,5 @@
 *.iml
 data
 *.pyc
+*.log
 .ipynb_checkpoints
