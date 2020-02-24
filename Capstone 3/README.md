@@ -1,4 +1,7 @@
 
+## summary
+use LSTM and GRU model to train models
+
 ## SHORTCUTS
 [Index](https://github.com/0xd5dc/amazon-review-validator/)
 
