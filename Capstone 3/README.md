@@ -26,6 +26,7 @@ This project uses review body and verfied_purchase columns from Amazon Review Da
 - [TensorFlow On Spark: Scalable TensorFlow Learning on Spark Clusters](https://databricks.com/session/tensorflow-on-spark-scalable-tensorflow-learning-on-spark-clusters)
 - [TensorFlow On Spark Github](https://github.com/yahoo/TensorFlowOnSpark)
 - [Tensorflow on Databricks](https://docs.databricks.com/applications/deep-learning/single-node-training/tensorflow.html)
+- [Azure Databricks tutorial for TensorFlow developers](https://tsmatz.wordpress.com/2018/05/09/databricks-tensorflowonspark-example/)
 ## SHORTCUTS
 [Index](https://github.com/0xd5dc/amazon-review-validator/)
 
