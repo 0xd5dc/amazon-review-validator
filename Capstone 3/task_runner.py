@@ -38,10 +38,9 @@ if __name__ == '__main__':
     samples = pickle.load(open("verified_purchase_reviews.p", "rb"))
     # log sample mean ideally to be .5
     logging.info(samples['label'].mean())
-    # split data
-    X_train_pad, X_test_pad, Y_train, Y_test = split_pad(samples.sample(100))
 
     # compile models
+    # add 1st model
     models = []
     models.append(Sequential())
     model = models[-1]
@@ -51,8 +50,18 @@ if __name__ == '__main__':
     model.add(Dense(1, activation='sigmoid'))
     model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
+    # add 2nd model
+    models.append(Sequential())
+    model = models[-1]
+    model.add(Embedding(TOP_WORDS + 1, EMBEDDING_VECTOR_LENGTH, input_length=MAX_REVIEW_LENGTH))
+    model.add(LSTM(32, return_sequences=True))
+    model.add(LSTM(16))
+    model.add(Dense(1, activation='sigmoid'))
+    model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+
     # fit and eval models
     for n in [1000, 10000, 50000]:
+        # split data
         X_train_pad, X_test_pad, Y_train, Y_test = split_pad(samples.sample(n))
         for model in models:
             model.fit(X_train_pad, Y_train, epochs=10, batch_size=64, validation_data=(X_test_pad, Y_test))
