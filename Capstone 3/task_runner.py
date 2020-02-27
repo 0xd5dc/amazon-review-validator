@@ -20,7 +20,7 @@ def split_pad(df):
                                                         df['label'].values, \
                                                         test_size=0.30, \
                                                         shuffle=True)
-    logging.info("Y train mean: {0}, Y test mean: {1}".format(Y_train.mean(), Y_test.mean()))
+    logging.info("Y train mean: {0:2.2f}, Y test mean: {1:2.2f}".format(Y_train.mean(), Y_test.mean()))
     # tokenize the reviews text
     tokenizer = Tokenizer(num_words=NUM_WORDS)
     tokenizer.fit_on_texts(X_train)
@@ -60,7 +60,7 @@ if __name__ == '__main__':
     model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
     # fit and eval models
-    for n in [1000, 10000, 50000]:
+    for n in [1000, 10000, 50000, 100000]:
         # split data
         X_train_pad, X_test_pad, Y_train, Y_test = split_pad(samples.sample(n))
         for model in models:
