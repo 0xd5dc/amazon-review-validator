@@ -3,4 +3,5 @@
 data
 *.pyc
 *.log
+*.p
 .ipynb_checkpoints
