@@ -6,19 +6,25 @@ from tensorflow.keras.preprocessing import sequence
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Embedding, LSTM, Dense, SimpleRNN, GRU
 from tensorflow.keras.preprocessing.text import Tokenizer
+import tensorflow as tf
 import logging
 
-DATA_FILE = '../data/sample_us.tsv'
 EMBEDDING_VECTOR_LENGTH = 32
 TOP_WORDS = 50000
 MAX_REVIEW_LENGTH = 600
 NUM_WORDS = 50000
 
 
-def split_pad(df):
+def split_pad(df, test_size=0.1):
+    """
+    split panda dataframe into train and test sets with shuffling
+    :param test_size: size of test in fraction of the dataframe
+    :param df: panda dataframe consists review_body, label columns
+    :return: X_train_pad, X_test_pad, Y_train, Y_test
+    """
     X_train, X_test, Y_train, Y_test = train_test_split(df['review_body'].values, \
                                                         df['label'].values, \
-                                                        test_size=0.30, \
+                                                        test_size=test_size, \
                                                         shuffle=True)
     logging.info("Y train mean: {0:2.2f}, Y test mean: {1:2.2f}".format(Y_train.mean(), Y_test.mean()))
     # tokenize the reviews text
@@ -35,7 +41,7 @@ if __name__ == '__main__':
     logging.basicConfig(filename='task.log', filemode='a', level=logging.DEBUG,
                         format='%(asctime)s - %(levelname)s - %(message)s')
     # load processed data
-    samples = pickle.load(open("verified_purchase_reviews.p", "rb"))
+    samples = pickle.load(open("results/clean_data_frame.p", "rb"))
     # log sample mean ideally to be .5
     logging.info(samples['label'].mean())
 
@@ -57,10 +63,12 @@ if __name__ == '__main__':
     model.add(LSTM(32, return_sequences=True))
     model.add(LSTM(16))
     model.add(Dense(1, activation='sigmoid'))
-    model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+    model.compile(loss='binary_crossentropy', optimizer='adam',
+                  metrics=['accuracy', tf.keras.metrics.Recall(), tf.keras.metrics.Precision()])
 
+    logging.info("Task Started...")
     # fit and eval models
-    for n in [1000, 10000, 50000, 100000]:
+    for n in [5000, 10000, 50000, 100000]:
         # split data
         X_train_pad, X_test_pad, Y_train, Y_test = split_pad(samples.sample(n))
         for model in models:
@@ -68,3 +76,5 @@ if __name__ == '__main__':
             # Final evaluation of the model on test data
             scores = model.evaluate(X_test_pad, Y_test, verbose=0)
             logging.info("loss: {0:2.2f}, accuracy {1:2.2f}".format(scores[0], scores[1]))
+    logging.info("Task Completed.")
+
