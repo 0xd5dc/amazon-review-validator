@@ -99,7 +99,7 @@ final products answers the business questions
     - Computes the recall of the predictions with respect to the labels.
 
 # Evaluations
-![ROC](https://github.com/0xd5dc/amazon-review-validator/blob/master/Capstone%203/results/roc.png)
+![ROC](results/roc.png)
 
 
 ## REFERENCES
