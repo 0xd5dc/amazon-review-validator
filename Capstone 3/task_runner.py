@@ -67,14 +67,14 @@ if __name__ == '__main__':
                   metrics=['accuracy', tf.keras.metrics.Recall(), tf.keras.metrics.Precision()])
 
     logging.info("Task Started...")
-    # fit and eval models
-    for n in [5000, 10000, 50000, 100000]:
+    # re-sample with size of n
+    for n in [1000, 5000, 10000, 50000]:
         # split data
         X_train_pad, X_test_pad, Y_train, Y_test = split_pad(samples.sample(n))
+        # fit and eval models
         for model in models:
             model.fit(X_train_pad, Y_train, epochs=10, batch_size=64, validation_data=(X_test_pad, Y_test))
             # Final evaluation of the model on test data
             scores = model.evaluate(X_test_pad, Y_test, verbose=0)
             logging.info("loss: {0:2.2f}, accuracy {1:2.2f}".format(scores[0], scores[1]))
     logging.info("Task Completed.")
-
