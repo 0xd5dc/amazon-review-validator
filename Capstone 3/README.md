@@ -12,23 +12,15 @@ This project uses product review_body and verfied_purchase columns from Amazon R
 root
 ├── Capstone 3
 │   ├── README.md
-│   ├── eda.ipynb
-│   ├── results
+│   ├── eda.ipynb                   # EDA Notebook
+│   ├── results                     
 │   │   ├── roc.png
-│   │   └── clean_data_frame.p
-│   ├── task.log
+│   │   └── clean_data_frame.p      # large data file ignored
+│   ├── task.log                    # log file for task_runner.py
 │   └── task_runner.py
-├── LICENSE
-├── README.md
-├── libs
-│   ├── __init__.py
-│   └── utils.py
 ├── scripts
 │   ├── data_migration.ps
 │   └── etl.sh
-├── templates
-│   ├── load_data.py
-│   └── load_libs.py
 └── tests
     ├── sample_us.tsv
     └── benchmark.ipynb
