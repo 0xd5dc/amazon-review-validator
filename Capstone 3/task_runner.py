@@ -46,8 +46,8 @@ if __name__ == '__main__':
     logging.info(samples['label'].mean())
 
     # compile models
-    # add 1st model
     models = []
+    # add 1st model
     models.append(Sequential())
     model = models[-1]
     model.add(Embedding(TOP_WORDS, EMBEDDING_VECTOR_LENGTH, input_length=MAX_REVIEW_LENGTH))
@@ -62,6 +62,17 @@ if __name__ == '__main__':
     model.add(Embedding(TOP_WORDS + 1, EMBEDDING_VECTOR_LENGTH, input_length=MAX_REVIEW_LENGTH))
     model.add(LSTM(32, return_sequences=True))
     model.add(LSTM(16))
+    model.add(Dense(1, activation='sigmoid'))
+    model.compile(loss='binary_crossentropy', optimizer='adam',
+                  metrics=['accuracy', tf.keras.metrics.Recall(), tf.keras.metrics.Precision()])
+
+    # add 3rd model
+    models.append(Sequential())
+    model = models[-1]
+    model.add(Embedding(TOP_WORDS + 1, EMBEDDING_VECTOR_LENGTH, input_length=MAX_REVIEW_LENGTH))
+    # The output of GRU will be a 3D tensor of shape (batch_size, timesteps, 256)
+    model.add(GRU(256, return_sequences=True))
+    model.add(SimpleRNN(128))
     model.add(Dense(1, activation='sigmoid'))
     model.compile(loss='binary_crossentropy', optimizer='adam',
                   metrics=['accuracy', tf.keras.metrics.Recall(), tf.keras.metrics.Precision()])
