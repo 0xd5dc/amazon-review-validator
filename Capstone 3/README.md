@@ -1,12 +1,12 @@
 
 ## Summary
-This project uses product review_body and verfied_purchase columns from Amazon Review Dataset to train machine learning models, Simple RNN,Long Short Term Memory Unit (LSTM) and Gated Recurrent Unit(GRU) and test predictions, on Tensorflow platform. 
+This project uses product review_body and verfied_purchase columns from Amazon Review Dataset to train machine learning models, Simple RNN, Long Short Term Memory Unit (LSTM) and Gated Recurrent Unit(GRU) and test predictions, using Tensorflow library. 
 
 ## Business Application
-- The project has the potential to provide benefit to users beyond just being interesting. (Is this project useful?) 
-I am interested in verified purchase because a review without a verified purchase may or may not from a real customer. 
-- Practical use is well articulated and demonstrated by project and project notes. (How well is this being explained as useful?) 
-A practical use of the project will be display product review strategically. As the platform owner, Amazon, display reviews more likely to increase sales or attracts .
+- This project could identify the hidden actual users, who bought the product from any store other than Amazon because a review without a verified purchase may or may not be a valid review from an actual user, but a review with a verified purchase is from an actual user. 
+- The practical use of the project will be displaying product reviews strategically to increase sales ethically. 
+    - For example, many users only read reviews from uses with verified purchases. So the verified purchase information can be displayed passively, namely, a user has to click a button to show the verified purchase information. 
+    
 ## Directory
 ```
 root
@@ -34,6 +34,7 @@ root
     └── benchmark.ipynb
 ```
 ## Assumptions
+- Apparel category data is the only data used for this project
 - Data on the storage server are mounted
 - A symbolic link, Data, is to the mounted data
 - Data is pre-processed, html tags removed and text cases lowered using ../scripts/[etl.sh](https://github.com/0xd5dc/amazon-review-validator/blob/master/scripts/etl.sh)
@@ -66,7 +67,7 @@ Amazon Customer Reviews (a.k.a. Product Reviews) is one of Amazon’s iconic pro
     sudo ln -s ~/blobs/mycontainer /path/to/project/data
     ```
 
-4. Data used in eda.ipynb is amazon_reviews_us_Apparel_v1_00 
+4. Data used in [eda.ipynb](eda.ipynb) is amazon_reviews_us_Apparel_v1_00 
 > For more detail check [Data Index](https://s3.amazonaws.com/amazon-reviews-pds/tsv/index.txt)
 >
 > Sample Data is in ../tests/[sample.tsv](https://github.com/0xd5dc/amazon-review-validator/blob/master/tests/sample_us.tsv)
@@ -87,9 +88,8 @@ Amazon Customer Reviews (a.k.a. Product Reviews) is one of Amazon’s iconic pro
     - [x] make presentation slides
 4. Deploy to the Spark Cluster
     - [x] create spark clusters
+    
 ## Results
-final products answers the business questions
-
 ### Metrics
 - Accuracy
     - Calculates how often predictions matches labels.
@@ -98,12 +98,42 @@ final products answers the business questions
 - Recall
     - Computes the recall of the predictions with respect to the labels.
 
-# Evaluations
-![ROC](results/roc.png)
+### Evaluations
+![ROC](results/roc2.png)
+> LSTM performs the best
 
+One of the results using 5000 samples with data from Apparel category
+
+- Simple RNN
+    - val_loss: 0.8704 
+    - val_accuracy: 0.6553 
+    - val_recall: 0.8129 
+    - val_precision: 0.6096
+- 2 Layer LSTM
+    - val_loss: 0.8213 
+    - val_accuracy: 0.7407 
+    - val_recall: 0.7661 
+    - val_precision: 0.7198
+- GRU
+    - val_loss: 1.2552
+    - val_accuracy: 0.6838 
+    - val_recall_2: 0.7310 
+    - val_precision_2: 0.6579
+    
+> ./[task_runner.py](task_runner.py) is used to generate results with sample sizes of 1,000, 5,000, 10,000, 50,000.
+>
+>Results are various because of the re-sampling. However, the accuracy does not improve after the size of the sampling exceeded 5,000.
+>
+>The precision wouldn't increase despite the increment of data points because of the false positive, which is reasonable as users bought the same products from other retailers will write valid reviews similar to users with verified purchases. Unlike using LSTM model to predict star rating from review text can reach 99% precision.
+## Future Research
+- Identify the hidden actual users, who bought the product from any store other than Amazon
+- Recommend review display strategies
+    - for different users, display review accordingly
+- Product improvement suggestion for businesses
 
 ## REFERENCES
 - [Amazon Customer Reviews](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+- [Tensorflow Metrics](https://www.tensorflow.org/api_docs/python/tf/keras/metrics)
 - [TensorFlow On Spark: Scalable TensorFlow Learning on Spark Clusters](https://databricks.com/session/tensorflow-on-spark-scalable-tensorflow-learning-on-spark-clusters)
 - [TensorFlow On Spark Github](https://github.com/yahoo/TensorFlowOnSpark)
 - [Tensorflow on Databricks](https://docs.databricks.com/applications/deep-learning/single-node-training/tensorflow.html)
