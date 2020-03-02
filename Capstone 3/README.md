@@ -16,6 +16,7 @@ root
 │   ├── results                     
 │   │   ├── roc.png
 │   │   └── clean_data_frame.p      # large data file ignored
+│   ├── slides.pptx                 # presentation slides
 │   ├── task.log                    # log file for task_runner.py
 │   └── task_runner.py
 ├── scripts
@@ -124,6 +125,7 @@ One of the results using 5000 samples with data from Apparel category
 - Product improvement suggestion for businesses
 
 ## REFERENCES
+- [Presentation Slides](slides.pptx)
 - [Amazon Customer Reviews](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
 - [Tensorflow Metrics](https://www.tensorflow.org/api_docs/python/tf/keras/metrics)
 - [TensorFlow On Spark: Scalable TensorFlow Learning on Spark Clusters](https://databricks.com/session/tensorflow-on-spark-scalable-tensorflow-learning-on-spark-clusters)
