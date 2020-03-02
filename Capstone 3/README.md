@@ -18,7 +18,7 @@ root
 │   │   └── clean_data_frame.p      # large data file ignored
 │   ├── slides.pptx                 # presentation slides
 │   ├── task.log                    # log file for task_runner.py
-│   └── task_runner.py
+│   └── task_runner.py              # train and test models, log results in task.log 
 ├── scripts
 │   ├── data_migration.ps
 │   └── etl.sh
