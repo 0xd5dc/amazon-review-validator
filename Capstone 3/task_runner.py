@@ -46,8 +46,8 @@ if __name__ == '__main__':
     logging.info(samples['label'].mean())
 
     # compile models
-    # add 1st model
     models = []
+    # add 1st model
     models.append(Sequential())
     model = models[-1]
     model.add(Embedding(TOP_WORDS, EMBEDDING_VECTOR_LENGTH, input_length=MAX_REVIEW_LENGTH))
@@ -66,15 +66,26 @@ if __name__ == '__main__':
     model.compile(loss='binary_crossentropy', optimizer='adam',
                   metrics=['accuracy', tf.keras.metrics.Recall(), tf.keras.metrics.Precision()])
 
+    # add 3rd model
+    models.append(Sequential())
+    model = models[-1]
+    model.add(Embedding(TOP_WORDS + 1, EMBEDDING_VECTOR_LENGTH, input_length=MAX_REVIEW_LENGTH))
+    # The output of GRU will be a 3D tensor of shape (batch_size, timesteps, 256)
+    model.add(GRU(256, return_sequences=True))
+    model.add(SimpleRNN(128))
+    model.add(Dense(1, activation='sigmoid'))
+    model.compile(loss='binary_crossentropy', optimizer='adam',
+                  metrics=['accuracy', tf.keras.metrics.Recall(), tf.keras.metrics.Precision()])
+
     logging.info("Task Started...")
-    # fit and eval models
-    for n in [5000, 10000, 50000, 100000]:
+    # re-sample with size of n
+    for n in [1000, 5000, 10000, 50000]:
         # split data
         X_train_pad, X_test_pad, Y_train, Y_test = split_pad(samples.sample(n))
+        # fit and eval models
         for model in models:
             model.fit(X_train_pad, Y_train, epochs=10, batch_size=64, validation_data=(X_test_pad, Y_test))
             # Final evaluation of the model on test data
             scores = model.evaluate(X_test_pad, Y_test, verbose=0)
             logging.info("loss: {0:2.2f}, accuracy {1:2.2f}".format(scores[0], scores[1]))
     logging.info("Task Completed.")
-
