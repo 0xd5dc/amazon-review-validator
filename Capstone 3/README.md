@@ -16,7 +16,6 @@ root
 │   ├── results                     
 │   │   ├── roc.png
 │   │   └── clean_data_frame.p      # large data file ignored
-│   ├── slides.pptx                 # presentation slides
 │   ├── task.log                    # log file for task_runner.py
 │   └── task_runner.py              # train and test models, log results in task.log 
 ├── scripts
@@ -93,25 +92,24 @@ Amazon Customer Reviews (a.k.a. Product Reviews) is one of Amazon’s iconic pro
 
 ### Evaluations
 ![ROC](results/roc2.png)
-> LSTM performs the best
 
 One of the results using 5000 samples with data from Apparel category
 
 - Simple RNN
-    - val_loss: 0.8704 
-    - val_accuracy: 0.6553 
-    - val_recall: 0.8129 
-    - val_precision: 0.6096
+    - val_loss: 0.9035 
+    - val_accuracy: 0.7927 
+    - val_recall_4: 0.7726 
+    - val_precision_4: 0.9341
 - 2 Layer LSTM
-    - val_loss: 0.8213 
-    - val_accuracy: 0.7407 
-    - val_recall: 0.7661 
-    - val_precision: 0.7198
+    - val_loss: 1.1111 
+    - val_accuracy: 0.7949 
+    - val_recall_5: 0.7702 
+    - val_precision_5: 0.9401
 - GRU
-    - val_loss: 1.2552
-    - val_accuracy: 0.6838 
-    - val_recall_2: 0.7310 
-    - val_precision_2: 0.6579
+    - val_loss: 0.6237 
+    - val_accuracy: 0.8052 
+    - val_recall: 0.7842 
+    - val_precision: 0.9411
     
 > ./[task_runner.py](task_runner.py) is used to generate results with sample sizes of 1,000, 5,000, 10,000, 50,000.
 >
@@ -125,7 +123,6 @@ One of the results using 5000 samples with data from Apparel category
 - Product improvement suggestion for businesses
 
 ## REFERENCES
-- [Presentation Slides](slides.pptx)
 - [Amazon Customer Reviews](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
 - [Tensorflow Metrics](https://www.tensorflow.org/api_docs/python/tf/keras/metrics)
 - [TensorFlow On Spark: Scalable TensorFlow Learning on Spark Clusters](https://databricks.com/session/tensorflow-on-spark-scalable-tensorflow-learning-on-spark-clusters)
