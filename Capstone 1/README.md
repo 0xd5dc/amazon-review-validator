@@ -1,46 +1,28 @@
-# Amazon Review Validator
-My data science project to guess if an amazon review is helpful for galvanize DSI. 
-## Summary
-1. explore the data with sql
-    - target columns:
-        - star_rating
-        - verified_purchase
-    - questions:
-        - how does a user rate?
-            - is there a relationship between new rating and the product title length?
-            - is there a relationship between new rating and the review headline length?  
-            - is there a relationship between new rating and the review body length?  
-            - is there a relationship between new rating and the review date(age)?  
-            - is there a relationship between new rating and the verified purchase?  
-            - is there a relationship between new rating and the vine?  
-            - is there a relationship between new rating and the helpful votes?  
-            - is there a relationship between new rating and the total votes?  
-            - is there a relationship between new rating and the accumulated rating?  
-                - for the same product_id, calculate avg accumulated rating for each review date
-            - is there a relationship between new rating and the accumulated number of reviews?  
-        - did a user have a purchase?
-            - is there a relationship between the verified purchase and the product title length?
-            - is there a relationship between the verified purchase and the review headline length?  
-            - is there a relationship between the verified purchase and the review body length?  
-            - is there a relationship between the verified purchase and the review date(age)?  
-            - is there a relationship between the verified purchase and the star rating?  
-            - is there a relationship between the verified purchase and the vine?  
-            - is there a relationship between the verified purchase and the accumulated rating?  
-            - is there a relationship between the verified purchase and the accumulated number of reviews?  
-            - is there a relationship between the verified purchase and the accumulated helpful votes?  
-            - is there a relationship between the verified purchase and the accumulated total votes?           
-2. generate new columns based on the findings/trends from the previous step
-3. perform Null Hypothesis Test on the sample and the whole dataset
-4. output the results and visualizations 
+# Amazon Review Validator - Part 1
+I explored the dataset, extracted features, studied the relationships between label and features, proposed and tested my hypothesis.
+
+## Objectives
+1. Prepare data
+    - [ ] mount the data
+    - [ ] pre-process the data
+    - [ ] extract features from the data
+    - [ ] transform the features and label into numbers
+2. Power Analysis
+    - [ ] do I have enough data to form the hypothesis
+2. Test hypothesis
+    - [ ] Z-test
+3. Output formatted data for visual aids
+    - [ ] make presentation slides
 
 ## Automation Pipeline
-- create crontab jobs
+- create cron jobs
     - ETL data
     - run spark job to train and test model with the cleaned data
     - save formatted output
 - creat visual aids
+
 ### Planning and Reasoning
-Amazon Customer Review dataset is on AWS S3, but I have a few Azure VMs, which utlized around 20%, and decided to use my Azure VMs instead of AWS S3.
+Amazon Customer Review dataset is on AWS S3, but I have a few Azure VMs, which utilized around 20%, and decided to use my Azure VMs instead of AWS S3.
 
 I am going to deploy Spark docker containers to perform data analysis, may create a spark cluster in production stage.
 
@@ -68,22 +50,11 @@ I don't need all the columns to perform analysis.
  In reviews with rating>4 and <2, people found reviews with words top 50 occurances are more helpful
  More frequently used words are more helpful or less frequently used words are more helpful?
  1)
- - [ ] H0: the helpfulness mean of most used 100 words > the helpfulness mean of the population
- - [x] H1: the helpfulness mean of most used 100 words < the helpfulness mean of the population
+     - [ ] H0: the helpfulness mean of most used 100 words > the helpfulness mean of the population
+     - [x] H1: the helpfulness mean of most used 100 words < the helpfulness mean of the population
  2) 
-- [x] H0: the helpfulness mean of least used 100 words > the helpfulness mean of the population
-- [ ] H1: the helpfulness mean of least used 100 words < the helpfulness mean of the population
- 
-### How about ratings?
-  Higher rating reviews or lower rating reviews are more helpful?
- 1)
- H0: the helpfulness mean of Higher rating reviews > the helpfulness mean of the population
- H1: the helpfulness mean of Higher rating reviews < the helpfulness mean of the population
- 
- 2) 
- H0: the helpfulness mean of lower rating reviews > the helpfulness mean of the population
- H1: the helpfulness mean of lower rating reviews < the helpfulness mean of the population
- 
+    - [x] H0: the helpfulness mean of least used 100 words > the helpfulness mean of the population
+    - [ ] H1: the helpfulness mean of least used 100 words < the helpfulness mean of the population
 
 ## SHORTCUTS
 [Index](https://github.com/0xd5dc/amazon-review-validator/)

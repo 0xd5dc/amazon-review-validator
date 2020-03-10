@@ -1,6 +1,5 @@
-
-## Summary
-This project uses product review_body and verfied_purchase columns from Amazon Review Dataset to train machine learning models, Simple RNN, Long Short Term Memory Unit (LSTM) and Gated Recurrent Unit(GRU) and test predictions, using Tensorflow library. 
+# Amazon Review Validator - Part 3
+This project uses product review_body and verified_purchase columns from Amazon Review Dataset to train machine learning models, Simple RNN, Long Short Term Memory Unit (LSTM) and Gated Recurrent Unit(GRU) and test predictions, using Tensorflow library. 
 
 ## Business Application
 - This project could identify the hidden actual users, who bought the product from any store other than Amazon because a review without a verified purchase may or may not be a valid review from an actual user, but a review with a verified purchase is from an actual user. 

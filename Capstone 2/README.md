@@ -1,7 +1,10 @@
-# Objectives
+# Amazon Review Validator - Part 2
+For this project, I decided use supervised learning techniques to train data models and to classify test data.
+
+## Objectives
 1. Prepare data for models
     - [x] select features and a label
-    - [x] vectorize features
+    - [x] tokenize the features
 2. Run classification models
     - [x] train and test with LogisticRegression
     - [x] train and test with NaiveBayes
@@ -12,7 +15,7 @@
 3. Output formatted data for visual aids
     - [ ] make presentation slides
     
-# Directory
+## Directory
 
     .
     ├── src     
